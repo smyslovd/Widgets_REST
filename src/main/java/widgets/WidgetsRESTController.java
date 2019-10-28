@@ -108,7 +108,7 @@ public class WidgetsRESTController
 		}
 	}
 	
-	@GetMapping(path = "/widget/getAll")
+	@GetMapping(path = "/widget")
 	public ResponseEntity<List<Widget>> getAllWidget() 
 	{
 		try 
