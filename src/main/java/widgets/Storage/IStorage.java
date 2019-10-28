@@ -1,6 +1,7 @@
 package widgets.Storage;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 
 import widgets.Data.Widget;
@@ -11,6 +12,6 @@ public interface IStorage
 	void delete(UUID id);
 	Widget update(Widget widget);
 	Widget get(UUID id);
-	LinkedList<Widget> getAll();
+	List<Widget> getAll();
 	void clear();
 }

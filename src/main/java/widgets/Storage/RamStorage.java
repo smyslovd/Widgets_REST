@@ -1,6 +1,9 @@
 package widgets.Storage;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 
 import widgets.Data.Widget;
@@ -21,7 +24,7 @@ public class RamStorage implements IStorage
 	@Override
 	public void delete(UUID id) 
 	{
-		synchronized(widgets)
+		synchronized(widget.getsyncRoot())
 		{
 			widgets.removeIf(w -> w.getId().equals(id));
 		}
@@ -30,7 +33,7 @@ public class RamStorage implements IStorage
 	@Override
 	public Widget update(Widget widget) 
 	{
-		synchronized(widgets)
+		synchronized(widget.getsyncRoot())
 		{
 			widgets.removeIf(w -> w.getId().equals(widget.getId()));
 			return insertWithSort(widget);				
@@ -47,11 +50,11 @@ public class RamStorage implements IStorage
 	}
 
 	@Override
-	public LinkedList<Widget> getAll() 
+	public List<Widget> getAll() 
 	{
 		synchronized(widgets)
 		{
-			return widgets;
+			return Collections.unmodifiableList(widgets);
 		}
 	}
 	
