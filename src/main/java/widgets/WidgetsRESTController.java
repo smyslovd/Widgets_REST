@@ -72,14 +72,13 @@ public class WidgetsRESTController
 	    	{
 		        return ResponseEntity.notFound().build();
 	    	}
+	    	int xPosition = widget.getxPosition() != null ? widget.getxPosition() : updatedWidget.getxPosition();
+	    	int yPosition = widget.getyPosition() != null ? widget.getyPosition() : updatedWidget.getyPosition();
+	    	int zIndex = widget.getzIndex() != null ? widget.getzIndex() : updatedWidget.getzIndex();
+	    	int height = widget.getHeight() != null ? widget.getHeight() : updatedWidget.getHeight();
+	    	int width = widget.getWidth() != null ? widget.getWidth() : updatedWidget.getWidth();
 	    	
-	    	if (widget.getxPosition() != null) updatedWidget.setxPosition(widget.getxPosition());
-	    	if (widget.getyPosition() != null) updatedWidget.setyPosition(widget.getyPosition());
-	    	if (widget.getHeight() != null) updatedWidget.setHeight(widget.getHeight());
-	    	if (widget.getWidth() != null) updatedWidget.setWidth(widget.getWidth());
-	    	if (widget.getzIndex() != null) updatedWidget.setzIndex(widget.getzIndex());
-
-			updatedWidget = storage.update(updatedWidget);
+			updatedWidget = storage.update(id, xPosition, yPosition, width, height, zIndex);
 			return ResponseEntity.ok(updatedWidget);
 		}
 		catch(Exception ex)

@@ -1,6 +1,5 @@
 package widgets.Storage;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,17 +23,18 @@ public class RamStorage implements IStorage
 	@Override
 	public void delete(UUID id) 
 	{
-		synchronized(widget.getsyncRoot())
+		synchronized(widgets)
 		{
 			widgets.removeIf(w -> w.getId().equals(id));
 		}
 	}
-
+	
 	@Override
-	public Widget update(Widget widget) 
+	public Widget update(UUID id, int xPosition, int yPosition, int width, int height, int zIndex) 
 	{
-		synchronized(widget.getsyncRoot())
+		synchronized(widgets)
 		{
+			Widget widget = new Widget(id, xPosition, yPosition, width, height, zIndex);
 			widgets.removeIf(w -> w.getId().equals(widget.getId()));
 			return insertWithSort(widget);				
 		}

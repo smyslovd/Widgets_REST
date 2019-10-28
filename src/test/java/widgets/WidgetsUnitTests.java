@@ -57,7 +57,7 @@ public class WidgetsUnitTests {
 		insertedWidget.setHeight(50);
 		insertedWidget.setWidth(50);
 
-		storage.update(insertedWidget);
+		storage.update(widget.getId(), insertedWidget.getxPosition(), insertedWidget.getyPosition(), insertedWidget.getWidth(), insertedWidget.getHeight(), insertedWidget.getzIndex());
 		Widget updatedWidget = storage.get(insertedWidget.getId());
 		if (updatedWidget == null) {
 			fail("Update error");

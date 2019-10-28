@@ -3,7 +3,7 @@ package widgets.Data;
 import java.util.Date;
 import java.util.UUID;
 
-public class Widget implements IWidget {
+public class Widget implements IWidget, Cloneable {
 
 	private final UUID id;
 	private Date dateChange;
@@ -30,8 +30,13 @@ public class Widget implements IWidget {
 	}
 
 	public Widget(int xPosition, int yPosition, int width, int height, Integer zIndex)
+	{		
+		this(UUID.randomUUID(),xPosition, yPosition, width, height, zIndex);
+	}
+	
+	public Widget(UUID id, int xPosition, int yPosition, int width, int height, Integer zIndex)
 	{
-		id = UUID.randomUUID();
+		this.id = id;
 		dateChange = new Date();
 		this.xPosition = xPosition;
 		this.yPosition = yPosition;
@@ -39,7 +44,7 @@ public class Widget implements IWidget {
 		this.width = width;
 		this.height = height;
 	}
-				
+
 	public void setzIndex(int value)
 	{
 		zIndex = value;
@@ -53,7 +58,7 @@ public class Widget implements IWidget {
 	public UUID getId() {
 		return id;
 	}
-
+	
 	public Date getDateChange() {
 		return dateChange;
 	}
@@ -93,4 +98,17 @@ public class Widget implements IWidget {
 	    	   width == otherWidget.width &&
 	    	   height == otherWidget.height;
 	}
+	
+	@Override
+	public Widget clone() {
+		try 
+		{
+			return (Widget)super.clone();
+		}
+	    catch( CloneNotSupportedException ex ) 
+		{
+	        throw new InternalError();
+	    }
+	}    
+
 }
